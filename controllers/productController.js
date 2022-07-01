@@ -36,14 +36,20 @@ const getProductById = async (req, res, id) => {
 
 const addNewProduct = async (req, res) => {
     try {
-        const product = {
-            title: "Test product",
-            description: "This is agood product",
-            price: 100
-        }
-        const newProduct = await Product.create(product)
-        res.writeHead(201, {"Content-Type": "application/json"})
-        res.end(JSON.stringify(newProduct))
+        let body = ""
+        req.on('data', (chunk) => {
+            body = body + chunk.toString()
+        })
+        req.on('end', async () => {
+            const {title, description, price} = Object.keys(body).length > 0 && JSON.parse(body)
+            const product = {
+                title: title || "Sample Title",
+                description: description || "Sample Description",
+                price: price || 100}
+            const newProduct = await Product.create(product)
+            res.writeHead(201, {"Content-Type": "application/json"})
+            res.end(JSON.stringify(newProduct))
+        })
     } catch (error) {
         console.log(error)
     }
