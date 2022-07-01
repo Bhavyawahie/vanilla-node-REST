@@ -1,4 +1,4 @@
-[
+const products = [
     {
         "id": "1",
         "name": "Airpods Wireless Bluetooth Headphones",
@@ -29,3 +29,5 @@
         "price": 49.99
     }
 ]
+
+module.exports = products
