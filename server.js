@@ -1,7 +1,7 @@
 const http = require('http')
 const colors = require('colors')
 const products = require('./data/products')
-const { getAllProducts, getProductById } = require('./controllers/productController')
+const { getAllProducts, getProductById, addNewProduct } = require('./controllers/productController')
 
 const server = http.createServer((req, res) => {
     if(req.url === "/api/v1/products" && req.method === "GET"){
@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
         const id = req.url.split("/")[4]
         getProductById(req, res, id)
     } else if (req.url === "/api/v1/products" && req.method === "POST") {
-        addNewProduct(req, res, id)
+        addNewProduct(req, res)
     } 
     else {
         res.writeHead(404, {'Content-Type': 'application/json'})
