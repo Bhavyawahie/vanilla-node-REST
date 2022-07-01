@@ -1,13 +1,16 @@
 const http = require('http')
 const colors = require('colors')
-const morgan = require('morgan')
 const products = require('./data/products')
+const { getAllProducts, getProductById } = require('./controllers/productController')
 
 const server = http.createServer((req, res) => {
     if(req.url === "/api/v1/products" && req.method === "GET"){
-        res.writeHead(200, {'Content-Type': 'application/json'})
-        res.end(JSON.stringify(products))
-    } else {
+        getAllProducts(req, res)
+    } else if (req.url.match(/\/api\/v1\/products\/([0-9]+)/) && req.method === "GET") {
+        const id = req.url.split("/")[4]
+        getProductById(req, res, id)
+    } 
+    else {
         res.writeHead(404, {'Content-Type': 'application/json'})
         res.end(JSON.stringify({ message: '404, Route Not found!'}))
     }
