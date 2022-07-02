@@ -2,6 +2,7 @@ const http = require('http')
 const colors = require('colors')
 const products = require('./data/products')
 const { getAllProducts, getProductById, addNewProduct, deleteProduct, updateProduct } = require('./controllers/productController')
+const { addNewUser } = require('./controllers/userController')
 
 const server = http.createServer((req, res) => {
     if(req.url === "/api/v1/products" && req.method === "GET"){
@@ -18,10 +19,14 @@ const server = http.createServer((req, res) => {
         const id =  req.url.split('/')[4]
         updateProduct(req, res, id)
     }
+    else if(req.url === "/api/v1/users/" && req.method === "POST") {
+        addNewUser(req, res)
+    }
     else {
         res.writeHead(404, {'Content-Type': 'application/json'})
         res.end(JSON.stringify({ message: '404, Route Not found!'}))
     }
+
 })
 
 const PORT = process.env.PORT || 4000
