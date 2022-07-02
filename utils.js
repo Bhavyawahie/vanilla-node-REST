@@ -1,4 +1,6 @@
 const fs = require('fs')
+const jwt = require('jsonwebtoken')
+
 const writeToFile = (fileName, content) => {
     fs.writeFileSync(fileName, JSON.stringify(content), 'utf-8',(err) => {
         if(err){
@@ -23,7 +25,12 @@ const getPostData = (req) => {
     })
 }
 
+const generateToken = async (id) => {
+    return jwt.sign({id}, "secretKey", {expiresIn: "30d"})
+}
+
 module.exports = {
     writeToFile,
-    getPostData
+    getPostData,
+    generateToken
 }
