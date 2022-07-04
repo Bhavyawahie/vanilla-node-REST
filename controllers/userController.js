@@ -1,6 +1,5 @@
 const User = require('../models/userModel')
 const { getPostData, generateToken } = require('../utils')
-const bcrypt = require('bcrypt')
 
 //addNewUser
 const addNewUser = async (req, res) => {
@@ -36,7 +35,7 @@ const authenticateUser = async (req, res) => {
                 id: user.id,
                 name: user.name,
                 email: user.email,
-                token: generateToken(user.id)
+                token: await generateToken(user.id)
             }))
         } 
     } else {
