@@ -1,1 +1,31 @@
-[{"id":"f55fe299-4fc1-4b21-bbb0-643cb25b3298","name":"Bhavya Wahie","email":"bm@sify.in","password":"$2b$10$ITfenCvShTTprWF2NQRdjOOUjaWhBBmBFpsLd9P0ezvMWmlOjLT3y"},{"id":"c966b73c-7981-43b7-bc31-202c3bc31a9d","name":"Nikunj Wahie","email":"nikunj@example.in","password":"$2b$10$6WWd2OuchmxFYaw8EWZRW.gD6uoLBuiL8HvSiYHobIo1gnLsrYPkW"}]
+[
+    {
+        "id": "f55fe299-4fc1-4b21-bbb0-643cb25b3298",
+        "name": "Bhavya Wahie",
+        "email": "bm@sify.in",
+        "password": "$2b$10$ITfenCvShTTprWF2NQRdjOOUjaWhBBmBFpsLd9P0ezvMWmlOjLT3y"
+    },
+    {
+        "id": "c966b73c-7981-43b7-bc31-202c3bc31a9d",
+        "name": "Nikunj Wahie",
+        "email": "nikunj@example.in",
+        "password": "$2b$10$6WWd2OuchmxFYaw8EWZRW.gD6uoLBuiL8HvSiYHobIo1gnLsrYPkW"
+    },
+    {
+        "id": "1f3ce313-b566-43ba-bfe6-628285935e68",
+        "name": "Vivek Wahie",
+        "email": "vivek@example.in",
+        "password": "$2b$10$/cvE7/7Xnlmerh21wHDK7eAS0Ypnbdx0ev7vGDdJPYakAXoJW8LB."
+    },
+    {
+        "id": "7c7c8c00-97cb-4ce2-83cc-e8950c28ec25",
+        "name": "Anju Wahie",
+        "email": "anju@example.in",
+        "password": "$2b$10$ZAzGVx472E6hmExQ/ZlUKe6tsXlBBRDkqmOgQXipaiyb0HhjiaLTi"
+    }, {
+        "id": "11351c37-d405-4acb-aefb-3034fc4fa1a6",
+        "name": "Prem Wahie",
+        "email": "prem@example.in",
+        "password": "$2b$10$03YWSqsMR7Sb45bzvfhHCONElBG4kcq/RiUR3yj0vwmNNTL1GGw/m"
+    }
+]
