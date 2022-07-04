@@ -12,8 +12,7 @@ const findById = (id) => {
 //findByEmail
 const findByEmail = (email) => {
     return new Promise((resolve, reject) => {
-        const user = users.find(user => user.email === email)
-        resolve(user)
+        resolve(users.find(u => u.email === email))
     })
 }
 
@@ -32,10 +31,22 @@ const create = (user) => {
     })
 }
 
+const matchPassword = (userId, password) => {
+    return new Promise(async (resolve, reject) => {
+        const user = users.find(user => user.id === userId)
+        if(bcrypt.compare(password, user.password)){
+            resolve(true)
+        } else {
+            resolve(false)
+        }
+    })
+}
+
 
 
 module.exports = {
     findById,
     findByEmail,
-    create
+    create,
+    matchPassword
 }
