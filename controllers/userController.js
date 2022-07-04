@@ -24,8 +24,29 @@ const addNewUser = async (req, res) => {
 
 //authenticateUser
 
+const authenticateUser = async (req, res) => {
+    const body = await getPostData(req)
+    const { email, password } = Object.keys(body).length > 0 && JSON.parse(body)
+    const user =  await User.findByEmail(email)
+    if(user){
+        const doPasswordsMatch = await User.matchPassword(user.id, password)
+        if(doPasswordsMatch){
+            res.writeHead(200, {"Content-Type": "application/json"})
+            res.end(JSON.stringify({
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                token: generateToken(user.id)
+            }))
+        } 
+    } else {
+        res.writeHead(401, {"Content-Type": "application/json"})
+        res.end(JSON.stringify({message: "Wrong email or password"}))
+    }
+}
 
 
 module.exports = {
-    addNewUser
+    addNewUser,
+    authenticateUser
 }
