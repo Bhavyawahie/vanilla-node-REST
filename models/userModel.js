@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt')
 //findById
 const findById = (id) => {
     return new Promise((resolve, reject) => {
-        resolve()
+        resolve(users.find(user => user.id === id))
     })
 }
 //findByEmail
