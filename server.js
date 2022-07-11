@@ -3,21 +3,26 @@ const colors = require('colors')
 const products = require('./data/products')
 const { getAllProducts, getProductById, addNewProduct, deleteProduct, updateProduct } = require('./controllers/productController')
 const { addNewUser, authenticateUser } = require('./controllers/userController')
+const { protect } = require('./middlewares/authMiddleware')
 
 const server = http.createServer((req, res) => {
-    if(req.url === "/api/v1/products" && req.method === "GET"){
+    if(req.url === "/api/v1/products" && req.method === "GET") {
         getAllProducts(req, res)
-    } else if (req.url.match(/\/api\/v1\/products\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$)|([0-9]+)/) && req.method === "GET") {
+    } 
+    else if (req.url.match(/\/api\/v1\/products\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$)|([0-9]+)/) && req.method === "GET") {
         const id = req.url.split("/")[4]
         getProductById(req, res, id)
-    } else if (req.url === "/api/v1/products" && req.method === "POST") {
-        addNewProduct(req, res)
-    } else if (req.url.match(/\/api\/v1\/products\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$)|([0-9]+)/) && req.method === "DELETE") {
+    } 
+    else if (req.url === "/api/v1/products" && req.method === "POST") {
+        protect(req, res) && addNewProduct(req, res)
+    } 
+    else if (req.url.match(/\/api\/v1\/products\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$)|([0-9]+)/) && req.method === "DELETE") {
         const id =  req.url.split('/')[4]
-        deleteProduct(req, res, id)
-    } else if (req.url.match(/\/api\/v1\/products\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$)|([0-9]+)/) && req.method === "PUT") {
+        protect(req, res) && deleteProduct(req, res, id)
+    } 
+    else if (req.url.match(/\/api\/v1\/products\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$)|([0-9]+)/) && req.method === "PUT") {
         const id =  req.url.split('/')[4]
-        updateProduct(req, res, id)
+        protect(req, res) && updateProduct(req, res, id)
     }
     else if(req.url === "/api/v1/users" && req.method === "POST") {
         addNewUser(req, res)
