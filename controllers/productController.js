@@ -62,7 +62,7 @@ const updateProduct = async (req, res, id) => {
             res.end(JSON.stringify({message: "Product Not Found!"}))
         } else {
             const body = await getPostData(req)
-            const { title, description, price } = body
+            const { title, description, price } = JSON.parse(body)
             const newProduct = {
                 title: title || product.title,
                 description: description || product.description,
